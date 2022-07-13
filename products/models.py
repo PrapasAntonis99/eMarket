@@ -16,12 +16,12 @@ LABEL_CHOICES = (
 
 class Item(models.Model):
     title = models.CharField(max_length=100)
-    price = models.IntegerField()
-    discount = models.IntegerField(blank=True, null=True)
+    slug = models.SlugField()
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
     label = models.CharField(choices=LABEL_CHOICES, blank=True, null=True, max_length=2)
-    slug = models.SlugField()
-    description = models.CharField(max_length=500)
+    price = models.IntegerField()
+    discount = models.IntegerField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -31,12 +31,25 @@ class Item(models.Model):
             "slug": self.slug
         })
 
+    def get_add_to_cart_url(self):
+        return reverse("products:add-to-cart", kwargs={
+            "slug": self.slug
+        })
+
+    def get_remove_from_cart_url(self):
+        return reverse("products:remove-from-cart", kwargs={
+            "slug": self.slug
+        })
+
 
 class OrderItem(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    ordered = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.title
+        return f"{self.item.title}"
 
 
 class Order(models.Model):
@@ -47,4 +60,4 @@ class Order(models.Model):
     ordered = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.title
+        return self.user.username

@@ -46,12 +46,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="/../product_list/">Products
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link waves-effect" href="/../checkout/">Checkout
+            <a class="nav-link waves-effect" href="/../product-list/">Products
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -59,13 +54,31 @@
 
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
+          {% if request.user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link waves-effect">
+            <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect">
               <span class="badge red z-depth-1 mr-1"> 1 </span>
               <i class="fas fa-shopping-cart"></i>
               <span class="clearfix d-none d-sm-inline-block"> Cart </span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Logout </span>
+            </a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'account_login' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Login </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Signup </span>
+            </a>
+          </li>
+          {% endif %}
         </ul>
 
       </div>
@@ -96,18 +109,23 @@
           <div class="p-4">
 
             <div class="mb-3">
-              <a href="">
-                {% if item.get_label_display == "primary" %}
-                  <span class="badge badge-pill {{ item.get_label_display }}-color">NEW</span>
-                {% elif item.get_label_display == "danger" %}
-                    <span class="badge badge-pill {{ item.get_label_display }}-color">HOT</span>
-                {% endif %}
-              </a>
               <h4>
                 <strong>
                   <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}</a>
                 </strong>
               </h4>
+              <a href="" class="grey-text">
+                <h5>
+                  {{ item.get_category_display }}
+                  <strong>
+                    {% if item.get_label_display == "primary" %}
+                      <span class="badge badge-pill {{ item.get_label_display }}-color">NEW</span>
+                    {% elif item.get_label_display == "danger" %}
+                      <span class="badge badge-pill {{ item.get_label_display }}-color">HOT</span>
+                    {% endif %}
+                  </strong>
+                </h5>
+              </a>
             </div>
 
             <h4 class="font-weight-bold blue-text">
@@ -125,14 +143,10 @@
 
             <p>{{ object.description }}</p>
 
-            <form class="d-flex justify-content-left">
-              <!-- Default input -->
-              <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
-              <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
-                <i class="fas fa-shopping-cart ml-1"></i>
-              </button>
-
-            </form>
+            <a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">Add to cart
+              <i class="fas fa-shopping-cart ml-1"></i>
+            </a>
+            <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-md my-0 p">Remove from cart</a>
 
           </div>
           <!--Content-->

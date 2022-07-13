@@ -16,6 +16,7 @@
   <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
   <!-- Your custom styles (optional) -->
   <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+
   <style type="text/css">
     html,
     body,
@@ -33,49 +34,34 @@
         height: 100vh;
       }
     }
-
-    @media (min-width: 800px) and (max-width: 850px) {
-
-      html,
-      body,
-      header,
-      .carousel {
-        height: 100vh;
-      }
-    }
-
   </style>
+
 </head>
 
 <body>
 
-  <!-- Navbar -->
+  <!--Navbar-->
   <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
     <div class="container">
 
-      <!-- Brand -->
+      <!--Brand-->
       <a class="navbar-brand waves-effect" class="nav-link waves-effect" href="/..">
         <h2><strong class="blue-text">eMarket</strong></h2>
       </a>
 
-      <!-- Collapse -->
+      <!--Collapse-->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Links -->
+      <!--Links-->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        <!-- Left -->
+        <!--Left-->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="product_list/">Products
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link waves-effect" href="checkout/">Checkout
+            <a class="nav-link waves-effect" href="product-list/">Products
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -83,21 +69,38 @@
 
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
-
+          {% if request.user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link waves-effect">
+            <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect">
               <span class="badge red z-depth-1 mr-1"> 1 </span>
               <i class="fas fa-shopping-cart"></i>
               <span class="clearfix d-none d-sm-inline-block"> Cart </span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Logout </span>
+            </a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'account_login' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Login </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Signup </span>
+            </a>
+          </li>
+          {% endif %}
         </ul>
 
       </div>
 
     </div>
   </nav>
-  <!-- Navbar -->
+  <!--Navbar-->
 
   <!--Carousel Wrapper-->
   <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4" data-ride="carousel">
@@ -292,7 +295,7 @@
                 {% with 'img/merchandise/'|add:item.title|add:'.jpg' as image_static %}
                   <img src="{% static image_static %}" class="card-img-top" alt="">
                 {% endwith %}
-                <a>
+                <a href="{{ item.get_absolute_url }}">
                   <div class="mask rgba-white-slight"></div>
                 </a>
               </div>
@@ -345,47 +348,6 @@
         <!--Grid row-->
 
       </section>
-      <!--Section: Products v.3-->
-
-      <!--Pagination
-      <nav class="d-flex justify-content-center wow fadeIn">
-        <ul class="pagination pg-blue">
-
-          ## Arrow left ##
-          <li class="page-item disabled">
-            <a class="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-
-          <li class="page-item active">
-            <a class="page-link" href="#">1
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">2</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">3</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">4</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">5</a>
-          </li>
-
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      Pagination-->
 
     </div>
   </main>
@@ -439,8 +401,8 @@
   <script type="text/javascript">
     // Animations initialization
     new WOW().init();
-
   </script>
+
 </body>
 
 </html>
