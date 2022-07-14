@@ -1,0 +1,586 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-14 16:55+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: products/templates/account/account_inactive.html:5
+#: products/templates/account/account_inactive.html:8
+msgid "Account Inactive"
+msgstr ""
+
+#: products/templates/account/account_inactive.html:10
+msgid "This account is inactive."
+msgstr ""
+
+#: products/templates/account/email.html:5
+#: products/templates/account/email.html:8
+msgid "E-mail Addresses"
+msgstr ""
+
+#: products/templates/account/email.html:10
+msgid "The following e-mail addresses are associated with your account:"
+msgstr ""
+
+#: products/templates/account/email.html:24
+msgid "Verified"
+msgstr ""
+
+#: products/templates/account/email.html:26
+msgid "Unverified"
+msgstr ""
+
+#: products/templates/account/email.html:28
+msgid "Primary"
+msgstr ""
+
+#: products/templates/account/email.html:34
+msgid "Make Primary"
+msgstr ""
+
+#: products/templates/account/email.html:35
+msgid "Re-send Verification"
+msgstr ""
+
+#: products/templates/account/email.html:36
+#: products/templates/socialaccount/connections.html:35
+msgid "Remove"
+msgstr ""
+
+#: products/templates/account/email.html:43
+msgid "Warning:"
+msgstr ""
+
+#: products/templates/account/email.html:43
+msgid ""
+"You currently do not have any e-mail address set up. You should really add "
+"an e-mail address so you can receive notifications, reset your password, etc."
+msgstr ""
+
+#: products/templates/account/email.html:48
+msgid "Add E-mail Address"
+msgstr ""
+
+#: products/templates/account/email.html:53
+msgid "Add E-mail"
+msgstr ""
+
+#: products/templates/account/email.html:63
+msgid "Do you really want to remove the selected e-mail address?"
+msgstr ""
+
+#: products/templates/account/email/base_message.txt:1
+#, python-format
+msgid "Hello from %(site_name)s!"
+msgstr ""
+
+#: products/templates/account/email/base_message.txt:5
+#, python-format
+msgid ""
+"Thank you for using %(site_name)s!\n"
+"%(site_domain)s"
+msgstr ""
+
+#: products/templates/account/email/email_confirmation_message.txt:5
+#, python-format
+msgid ""
+"You're receiving this e-mail because user %(user_display)s has given your e-"
+"mail address to register an account on %(site_domain)s.\n"
+"\n"
+"To confirm this is correct, go to %(activate_url)s"
+msgstr ""
+
+#: products/templates/account/email/email_confirmation_subject.txt:3
+msgid "Please Confirm Your E-mail Address"
+msgstr ""
+
+#: products/templates/account/email/password_reset_key_message.txt:4
+msgid ""
+"You're receiving this e-mail because you or someone else has requested a "
+"password for your user account.\n"
+"It can be safely ignored if you did not request a password reset. Click the "
+"link below to reset your password."
+msgstr ""
+
+#: products/templates/account/email/password_reset_key_message.txt:9
+#, python-format
+msgid "In case you forgot, your username is %(username)s."
+msgstr ""
+
+#: products/templates/account/email/password_reset_key_subject.txt:3
+#: products/templates/account/email/unknown_account_subject.txt:3
+msgid "Password Reset E-mail"
+msgstr ""
+
+#: products/templates/account/email/unknown_account_message.txt:4
+#, python-format
+msgid ""
+"You are receiving this e-mail because you or someone else has requested a\n"
+"password for your user account. However, we do not have any record of a "
+"user\n"
+"with email %(email)s in our database.\n"
+"\n"
+"This mail can be safely ignored if you did not request a password reset.\n"
+"\n"
+"If it was you, you can sign up for an account using the link below."
+msgstr ""
+
+#: products/templates/account/email_confirm.html:6
+#: products/templates/account/email_confirm.html:10
+msgid "Confirm E-mail Address"
+msgstr ""
+
+#: products/templates/account/email_confirm.html:16
+#, python-format
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
+"address for user %(user_display)s."
+msgstr ""
+
+#: products/templates/account/email_confirm.html:20
+msgid "Confirm"
+msgstr ""
+
+#: products/templates/account/email_confirm.html:27
+#, python-format
+msgid ""
+"This e-mail confirmation link expired or is invalid. Please <a "
+"href=\"%(email_url)s\">issue a new e-mail confirmation request</a>."
+msgstr ""
+
+#: products/templates/account/login.html:7
+#: products/templates/socialaccount/login.html:4
+msgid "Sign In"
+msgstr ""
+
+#: products/templates/account/login.html:11
+#: products/templates/account/login.html:40 products/templates/home.html:93
+#: products/templates/order-summary.html:96
+#: products/templates/product-list.html:102 products/templates/product.html:78
+msgid "Login"
+msgstr "Σύνδεση"
+
+#: products/templates/account/login.html:16
+#, python-format
+msgid ""
+"Please sign in with one\n"
+"of your existing third party accounts. Or, <a href=\"%(signup_url)s\">sign "
+"up</a>\n"
+"for a %(site_name)s account and sign in below:"
+msgstr ""
+
+#: products/templates/account/login.html:26
+msgid "or"
+msgstr ""
+
+#: products/templates/account/login.html:33
+#, python-format
+msgid ""
+"If you have not created an account yet, then please\n"
+"<a href=\"%(signup_url)s\">sign up</a> first."
+msgstr ""
+
+#: products/templates/account/logout.html:5
+msgid "Sign Out"
+msgstr ""
+
+#: products/templates/account/logout.html:8
+#: products/templates/account/logout.html:17 products/templates/home.html:87
+#: products/templates/order-summary.html:90
+#: products/templates/product-list.html:96 products/templates/product.html:72
+msgid "Logout"
+msgstr "Αποσύνδεση"
+
+#: products/templates/account/logout.html:10
+msgid "Are you sure you want to logout?"
+msgstr ""
+
+#: products/templates/account/password_change.html:5
+#: products/templates/account/password_change.html:8
+#: products/templates/account/password_change.html:13
+#: products/templates/account/password_reset_from_key.html:4
+#: products/templates/account/password_reset_from_key.html:7
+#: products/templates/account/password_reset_from_key_done.html:4
+#: products/templates/account/password_reset_from_key_done.html:7
+msgid "Change Password"
+msgstr ""
+
+#: products/templates/account/password_change.html:14
+msgid "Forgot Password?"
+msgstr ""
+
+#: products/templates/account/password_reset.html:6
+#: products/templates/account/password_reset.html:10
+#: products/templates/account/password_reset_done.html:6
+#: products/templates/account/password_reset_done.html:9
+msgid "Password Reset"
+msgstr ""
+
+#: products/templates/account/password_reset.html:15
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll send you "
+"an e-mail allowing you to reset it."
+msgstr ""
+
+#: products/templates/account/password_reset.html:20
+msgid "Reset My Password"
+msgstr ""
+
+#: products/templates/account/password_reset.html:23
+msgid "Please contact us if you have any trouble resetting your password."
+msgstr ""
+
+#: products/templates/account/password_reset_done.html:15
+msgid ""
+"We have sent you an e-mail. If you have not received it please check your "
+"spam folder. Otherwise contact us if you do not receive it in a few minutes."
+msgstr ""
+
+#: products/templates/account/password_reset_from_key.html:7
+msgid "Bad Token"
+msgstr ""
+
+#: products/templates/account/password_reset_from_key.html:11
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"a>."
+msgstr ""
+
+#: products/templates/account/password_reset_from_key.html:16
+msgid "change password"
+msgstr ""
+
+#: products/templates/account/password_reset_from_key_done.html:8
+msgid "Your password is now changed."
+msgstr ""
+
+#: products/templates/account/password_set.html:5
+#: products/templates/account/password_set.html:8
+#: products/templates/account/password_set.html:13
+msgid "Set Password"
+msgstr ""
+
+#: products/templates/account/signup.html:6 products/templates/home.html:98
+#: products/templates/order-summary.html:101
+#: products/templates/product-list.html:107 products/templates/product.html:83
+#: products/templates/socialaccount/signup.html:5
+msgid "Signup"
+msgstr "Εγγραφή"
+
+#: products/templates/account/signup.html:9
+#: products/templates/account/signup.html:16
+#: products/templates/socialaccount/signup.html:8
+#: products/templates/socialaccount/signup.html:19
+msgid "Sign Up"
+msgstr ""
+
+#: products/templates/account/signup.html:11
+#, python-format
+msgid ""
+"Already have an account? Then please <a href=\"%(login_url)s\">login</a>."
+msgstr ""
+
+#: products/templates/account/signup_closed.html:5
+#: products/templates/account/signup_closed.html:8
+msgid "Sign Up Closed"
+msgstr ""
+
+#: products/templates/account/signup_closed.html:10
+msgid "We are sorry, but the sign up is currently closed."
+msgstr ""
+
+#: products/templates/account/snippets/already_logged_in.html:5
+msgid "Note"
+msgstr ""
+
+#: products/templates/account/snippets/already_logged_in.html:5
+#, python-format
+msgid "you are already logged in as %(user_display)s."
+msgstr ""
+
+#: products/templates/account/verification_sent.html:5
+#: products/templates/account/verification_sent.html:8
+#: products/templates/account/verified_email_required.html:5
+#: products/templates/account/verified_email_required.html:8
+msgid "Verify Your E-mail Address"
+msgstr ""
+
+#: products/templates/account/verification_sent.html:10
+msgid ""
+"We have sent an e-mail to you for verification. Follow the link provided to "
+"finalize the signup process. If you do not see the verification e-mail in "
+"your main inbox, check your spam folder. Please contact us if you do not "
+"receive the verification e-mail within a few minutes."
+msgstr ""
+
+#: products/templates/account/verified_email_required.html:12
+msgid ""
+"This part of the site requires us to verify that\n"
+"you are who you claim to be. For this purpose, we require that you\n"
+"verify ownership of your e-mail address. "
+msgstr ""
+
+#: products/templates/account/verified_email_required.html:16
+msgid ""
+"We have sent an e-mail to you for\n"
+"verification. Please click on the link inside that e-mail. If you do not see "
+"the verification e-mail in your main inbox, check your spam folder. "
+"Otherwise\n"
+"contact us if you do not receive it within a few minutes."
+msgstr ""
+
+#: products/templates/account/verified_email_required.html:20
+#, python-format
+msgid ""
+"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
+"mail address</a>."
+msgstr ""
+
+#: products/templates/home.html:66 products/templates/order-summary.html:69
+#: products/templates/product.html:51
+msgid "Products"
+msgstr "Προϊόντα"
+
+#: products/templates/home.html:76 products/templates/order-summary.html:79
+#: products/templates/product-list.html:85 products/templates/product.html:61
+msgid "Welcome back"
+msgstr "Καλωσήρθες πίσω"
+
+#: products/templates/home.html:82 products/templates/order-summary.html:85
+#: products/templates/product-list.html:91 products/templates/product.html:67
+msgid "Cart"
+msgstr "Καλάθι"
+
+#: products/templates/home.html:146 products/templates/home.html:176
+#: products/templates/home.html:206
+msgid "Learn Bootstrap 4 with MDB"
+msgstr "Μάθε να χειρίζεσαι το Bootstrap 4"
+
+#: products/templates/home.html:150 products/templates/home.html:180
+#: products/templates/home.html:210
+msgid "Best and Free guide of responsive web design"
+msgstr "Ο καλύτερος δωρεάν οδηγός για web design"
+
+#: products/templates/home.html:154 products/templates/home.html:184
+#: products/templates/home.html:214
+msgid ""
+"The most comprehensive tutorial for the Bootstrap 4. Loved by over 500.000 "
+"users. Video and written versions available. Create your own, stunning "
+"website."
+msgstr ""
+"Το πιο ολοκληρωμένο σεμινάριο για το Bootstrap 4. Αγαπήθηκε από "
+"περισσότερους από 500.000 χρήστες. Διαθέσιμες εκδόσεις βίντεο και γραπτών. "
+"Δημιουργήστε τη δική σας, εντυπωσιακή ιστοσελίδα."
+
+#: products/templates/home.html:232 products/templates/home.html:377
+msgid "Previous"
+msgstr "Προηγούμενο"
+
+#: products/templates/home.html:236 products/templates/home.html:392
+msgid "Next"
+msgstr "Επόμενο"
+
+#: products/templates/home.html:251 products/templates/product-list.html:127
+msgid "Categories"
+msgstr "Κατηγορίες"
+
+#: products/templates/home.html:265 products/templates/product-list.html:141
+msgid "All"
+msgstr "Όλες"
+
+#: products/templates/home.html:270 products/templates/product-list.html:146
+msgid "Shirts"
+msgstr "Μπλούζα"
+
+#: products/templates/home.html:273 products/templates/product-list.html:149
+msgid "Sportwears"
+msgstr "Αθλητικά"
+
+#: products/templates/home.html:276 products/templates/product-list.html:152
+msgid "Outwears"
+msgstr "Εξόδου"
+
+#: products/templates/home.html:326 products/templates/product-list.html:204
+#: products/templates/product.html:127
+msgid "NEW"
+msgstr "ΝΕΟ"
+
+#: products/templates/home.html:328 products/templates/product-list.html:206
+#: products/templates/product.html:129
+msgid "HOT"
+msgstr "ΚΑΥΤΟ"
+
+#: products/templates/openid/login.html:9
+msgid "OpenID Sign In"
+msgstr ""
+
+#: products/templates/order-summary.html:64
+#: products/templates/product-list.html:75 products/templates/product.html:46
+msgid "Home"
+msgstr "Αρχική"
+
+#: products/templates/order-summary.html:140
+msgid "Item title"
+msgstr "Tίτλος Προϊόντος"
+
+#: products/templates/order-summary.html:141
+msgid "Price"
+msgstr "Τιμή"
+
+#: products/templates/order-summary.html:142
+msgid "Discount Price"
+msgstr "Τιμή Έκπτωσης"
+
+#: products/templates/order-summary.html:143
+msgid "Quantity"
+msgstr "Ποσότητα"
+
+#: products/templates/order-summary.html:144
+msgid "Total Item Price"
+msgstr "Συνολική Τιμή Προϊόντος"
+
+#: products/templates/order-summary.html:145
+#: products/templates/order-summary.html:173
+msgid "Saving"
+msgstr "Εξοικονόμηση"
+
+#: products/templates/order-summary.html:184
+msgid "Your cart is empty"
+msgstr "Το καλάθι σας είναι άδειο."
+
+#: products/templates/order-summary.html:189
+msgid "Order Total"
+msgstr "Σύνολο Παραγγελίας"
+
+#: products/templates/order-summary.html:195
+msgid "Continue Shopping"
+msgstr "Επιστροφή στα ψώνια"
+
+#: products/templates/product.html:147
+msgid "Description"
+msgstr "Περιγραφή"
+
+#: products/templates/product.html:151
+msgid "Add to cart"
+msgstr "Προσθήκη στο καλάθι"
+
+#: products/templates/product.html:154
+msgid "Remove from cart"
+msgstr "Αφαίρεση από το καλάθι"
+
+#: products/templates/socialaccount/authentication_error.html:5
+#: products/templates/socialaccount/authentication_error.html:8
+msgid "Social Network Login Failure"
+msgstr ""
+
+#: products/templates/socialaccount/authentication_error.html:10
+msgid ""
+"An error occurred while attempting to login via your social network account."
+msgstr ""
+
+#: products/templates/socialaccount/connections.html:5
+#: products/templates/socialaccount/connections.html:8
+msgid "Account Connections"
+msgstr ""
+
+#: products/templates/socialaccount/connections.html:11
+msgid ""
+"You can sign in to your account using any of the following third party "
+"accounts:"
+msgstr ""
+
+#: products/templates/socialaccount/connections.html:43
+msgid ""
+"You currently have no social network accounts connected to this account."
+msgstr ""
+
+#: products/templates/socialaccount/connections.html:46
+msgid "Add a 3rd Party Account"
+msgstr ""
+
+#: products/templates/socialaccount/login.html:8
+#, python-format
+msgid "Connect %(provider)s"
+msgstr ""
+
+#: products/templates/socialaccount/login.html:10
+#, python-format
+msgid "You are about to connect a new third party account from %(provider)s."
+msgstr ""
+
+#: products/templates/socialaccount/login.html:12
+#, python-format
+msgid "Sign In Via %(provider)s"
+msgstr ""
+
+#: products/templates/socialaccount/login.html:14
+#, python-format
+msgid "You are about to sign in using a third party account from %(provider)s."
+msgstr ""
+
+#: products/templates/socialaccount/login.html:19
+msgid "Continue"
+msgstr ""
+
+#: products/templates/socialaccount/login_cancelled.html:5
+#: products/templates/socialaccount/login_cancelled.html:9
+msgid "Login Cancelled"
+msgstr ""
+
+#: products/templates/socialaccount/login_cancelled.html:13
+#, python-format
+msgid ""
+"You decided to cancel logging in to our site using one of your existing "
+"accounts. If this was a mistake, please proceed to <a "
+"href=\"%(login_url)s\">sign in</a>."
+msgstr ""
+
+#: products/templates/socialaccount/messages/account_connected.txt:2
+msgid "The social account has been connected."
+msgstr ""
+
+#: products/templates/socialaccount/messages/account_connected_other.txt:2
+msgid "The social account is already connected to a different account."
+msgstr ""
+
+#: products/templates/socialaccount/messages/account_disconnected.txt:2
+msgid "The social account has been disconnected."
+msgstr ""
+
+#: products/templates/socialaccount/signup.html:10
+#, python-format
+msgid ""
+"You are about to use your %(provider_name)s account to login to\n"
+"%(site_name)s. As a final step, please complete the following form:"
+msgstr ""
+
+#: products/views.py:69 products/views.py:131
+msgid "This item quantity was updated."
+msgstr "Το πλήθος του προϊόντος ενημερώθηκε."
+
+#: products/views.py:73 products/views.py:80
+msgid "This item was added to your cart."
+msgstr "Το προϊόν προστέθηκε στο καλάθι."
+
+#: products/views.py:102
+msgid "This item was removed from your cart."
+msgstr "Το προϊόν αφαιρέθηκε από το καλάθι."
+
+#~ msgid "{{ item.get_category_display }}"
+#~ msgstr "ΤΕΣΤ"

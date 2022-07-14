@@ -1,4 +1,6 @@
 {% load static %}
+{% load i18n %}
+{% load cart_count_tag %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +61,12 @@
         <!--Left-->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="/../product-list/">Products
+            <a class="nav-link waves-effect" href="/..">{% trans "Home" %}
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="/../product-list/">{% trans "Products" %}
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -69,26 +76,29 @@
         <ul class="navbar-nav nav-flex-icons">
           {% if request.user.is_authenticated %}
           <li class="nav-item">
-            <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect">
-              <span class="badge red z-depth-1 mr-1"> 1 </span>
+            <p style="margin-top: 8px; margin-right: 15px;">{% trans "Welcome back" %} {{ request.user|title }}!</p>
+          </li>
+          <li class="nav-item">
+            <a href="/order-summary/" class="nav-link waves-effect">
+              <span class="badge red z-depth-1 mr-1"> {{ request.user|cart_item_count }} </span>
               <i class="fas fa-shopping-cart"></i>
-              <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+              <span class="clearfix d-none d-sm-inline-block"> {% trans "Cart" %} </span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
-              <span class="clearfix d-none d-sm-inline-block"> Logout </span>
+              <span class="clearfix d-none d-sm-inline-block"> {% trans "Logout" %} </span>
             </a>
           </li>
           {% else %}
           <li class="nav-item">
             <a class="nav-link waves-effect" href="{% url 'account_login' %}">
-              <span class="clearfix d-none d-sm-inline-block"> Login </span>
+              <span class="clearfix d-none d-sm-inline-block"> {% trans "Login" %} </span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
-              <span class="clearfix d-none d-sm-inline-block"> Signup </span>
+              <span class="clearfix d-none d-sm-inline-block"> {% trans "Signup" %} </span>
             </a>
           </li>
           {% endif %}
@@ -102,33 +112,37 @@
 
 <body>
 
-  <!--Message window-->
+  
   <div class="mt-5 pt-4">
+
+    <!--Message window-->
     {% if messages %}
-        {% for message in messages %}
+      {% for message in messages %}
         <div class="alert alert-{{ message.tags }}" role="alert" style="margin-top: 15px; text-align: center;">
           {{ message }}
         </div>
-        {% endfor %}
+      {% endfor %}
     {% else %}
-        <div style="margin-top: 81px;"></div>
+      <div style="margin-top: 81px;"></div>
     {% endif %}
-    </div>
     <!--Message window-->
 
+    <!--Main layout-->
     <main>
       <div class="container">
   
       <div class="table-responsive text-nowrap">
       <h2>Order Summary</h2>
-      <table class="table">
+      <table class="table" style="text-align: center;">
           <thead>
           <tr>
               <th scope="col">#</th>
-              <th scope="col">Item title</th>
-              <th scope="col">Price</th>
-              <th scope="col">Quantity</th>
-              <th scope="col">Total Item Price</th>
+              <th scope="col">{% trans "Item title" %}</th>
+              <th scope="col">{% trans "Price" %}</th>
+              <th scope="col">{% trans "Discount Price" %}</th>
+              <th scope="col">{% trans "Quantity" %}</th>
+              <th scope="col">{% trans "Total Item Price" %}</th>
+              <th scope="col">{% trans "Saving" %}</th>
           </tr>
           </thead>
           <tbody>
@@ -136,52 +150,51 @@
           <tr>
               <th scope="row">{{ forloop.counter }}</th>
               <td>{{ order_item.item.title }}</td>
-              <td>{{ order_item.item.price }}</td>
+              <td>{{ order_item.item.price }}€</td>
               <td>
-                  <a href="{% url 'core:remove-single-item-from-cart' order_item.item.slug %}"><i class="fas fa-minus mr-2"></i></a>
-                  {{ order_item.quantity }}
-                  <a href="{% url 'core:add-to-cart' order_item.item.slug %}"><i class="fas fa-plus ml-2"></i></a>
+              {% if order_item.item.discount %}
+                  {{ order_item.item.discount }}€
+              {% endif %}
               </td>
               <td>
-              {% if order_item.item.discount_price %}
-                  ${{ order_item.get_total_discount_item_price }}
-                  <span class="badge badge-primary">Saving ${{ order_item.get_amount_saved }}</span>
+                  <a href="{% url 'products:remove-single-item-from-cart' order_item.item.slug %}"><i class="fas fa-minus mr-2"></i></a>
+                  {{ order_item.quantity }}
+                  <a href="{% url 'products:add-to-cart' order_item.item.slug %}"><i class="fas fa-plus ml-2"></i></a>
+              </td>
+              <td>
+              {% if order_item.item.discount %}
+                  {{ order_item.get_total_discount_item_price }}€
               {% else %}
-                  ${{ order_item.get_total_item_price }}
+                  {{ order_item.get_total_item_price }}€
               {% endif %}
-              <a style='color: red;' href="{% url 'core:remove-from-cart' order_item.item.slug %}">
+              </td>
+              <td>
+                {% if order_item.item.discount %}
+                    <span class="badge badge-secondary">{% trans "Saving" %} {{ order_item.get_amount_saved }}€</span>
+                {% endif %}
+              </td>
+              <td>
+                <a style='color: red;' href="{% url 'products:remove-from-cart' order_item.item.slug %}">
                   <i class="fas fa-trash float-right"></i>
-              </a>
+                </a>
               </td>
           </tr>
           {% empty %}
           <tr>
-              <td colspan='5'>Your cart is empty</td>
-          </tr>
-          <tr>
-              <td colspan="5">
-              <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
-              </td>
+              <td colspan='8'>{% trans "Your cart is empty" %}</td>
           </tr>
           {% endfor %}
-          {% if object.coupon %}
-          <tr>
-              <td colspan="4"><b>Coupon</b></td>
-              <td><b>-${{ object.coupon.amount }}</b></td>
-          </tr>
-          {% endif %}
           {% if object.get_total %}
           <tr>
-              <td colspan="4"><b>Order Total</b></td>
-              <td><b>${{ object.get_total }}</b></td>
-          </tr>
-          <tr>
-              <td colspan="5">
-              <a class='btn btn-warning float-right ml-2' href='/checkout/'>Proceed to checkout</a>
-              <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
-              </td>
+              <td colspan='7'><b>{% trans "Order Total" %}</b></td>
+              <td><b>{{ object.get_total }}€</b></td>
           </tr>
           {% endif %}
+          <tr>
+            <td colspan='8'>
+            <a class='btn btn-primary float-right' href='/../product-list/'>{% trans "Continue Shopping" %}</a>
+            </td>
+        </tr>
           </tbody>
       </table>
   
@@ -189,13 +202,12 @@
   
       </div>
     </main>
+    <!--Main layout-->
+
+  </div>
 
     <!--Footer-->
     <footer class="page-footer text-center font-small mt-4 wow fadeIn">
-
-      <!--Call to action-->
-      
-      <!--/.Call to action-->
 
       <hr class="my-4">
 
