@@ -1,31 +1,27 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
 from django.utils import timezone
-from .models import Item, OrderItem, Order
+from .models import Item, OrderItem, Order, Category
 from django.utils.translation import gettext as _
 
 from django.contrib.auth.models import User
 
 
-def product(request):
-    context = {
-        'items': Item.objects.all()
-    }
-    return render(request, 'product.html', context)
-
-
-def checkout(request):
-    return render(request, 'checkout.html')
-
-
 class ProductsView(ListView):
     model = Item
+    paginate_by = 3
     template_name = "product-list.html"
+
+    def get_context_data(self,**kwargs):
+        context = super(ProductsView, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 
 
 class HomeView(ListView):
@@ -49,6 +45,18 @@ class OrderSummaryView(LoginRequiredMixin, View):
             return render(self.request, 'order-summary.html', context)
         except ObjectDoesNotExist:
             return redirect("/")
+
+
+def ShowCategories(request):
+    item = Item.objects.all()
+    category = request.GET.get('category')
+    item = Item.objects.filter(category__name=category)
+    categories = Category.objects.all()
+    context = {
+        'items': item,
+        'categories': categories,
+    }
+    return render(request, 'product-list.html', context)
 
 
 @login_required

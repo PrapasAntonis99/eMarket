@@ -138,28 +138,20 @@
           <!-- Links -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">{% trans "All" %}
+              <a class="nav-link" href="{% url 'products:show-categories' %}?category=All">All
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">{% trans "Shirts" %}</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">{% trans "Sportwears" %}</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">{% trans "Outwears" %}</a>
-            </li>
-
+            {% for category in categories %}
+              {% if category.name != 'All' %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'products:show-categories' %}?category={{ category.name }}">{{ category.name }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
           </ul>
           <!-- Links -->
 
-          <form class="form-inline">
-            <div class="md-form my-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            </div>
-          </form>
         </div>
         <!-- Collapsible content -->
 
@@ -172,7 +164,7 @@
         <!--Grid row-->
         <div class="row wow fadeIn">
 
-          {% for item in object_list %}
+          {% for item in items %}
 
           <!--Grid column-->
           <div class="col-lg-4 col-md-6 mb-4">
@@ -210,10 +202,10 @@
 
                 <h4 class="font-weight-bold blue-text">
                   {% if item.discount != null %}
+                    <strong>{{ item.discount }}€</strong>
                     <span class="mr-1">
                       <del style="color:gray;">{{ item.price }}€</del>
                     </span>
-                    <strong>{{ item.discount }}€</strong>
                   {% else %}
                     <strong>{{ item.price }}€</strong>
                   {% endif %}
@@ -237,6 +229,39 @@
       <!--Section: Products v.3-->
 
     </div>
+
+    <!--Pagination-->
+    {% if is_paginated %}
+      <nav class="d-flex justify-content-center wow fadeIn">
+        <ul class="pagination pg-blue">
+
+          {% if page_obj.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">{% trans "Previous" %}</span>
+              </a>
+            </li>
+          {% endif %}
+
+          <li class="page-item active">
+            <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+
+          {% if page_obj.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">{% trans "Next" %}</span>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
+      <!--Pagination-->
 
   </main>
   <!--Main layout-->

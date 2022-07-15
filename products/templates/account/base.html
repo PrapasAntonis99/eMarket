@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load cart_count_tag %}
 
 <!DOCTYPE html>
@@ -62,12 +63,12 @@
           <!--Left-->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link waves-effect" href="/..">Home
+              <a class="nav-link waves-effect" href="/..">{% trans "Home" %}
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link waves-effect" href="/../product-list/">Products
+              <a class="nav-link waves-effect" href="/../product-list/">{% trans "Products" %}
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -75,31 +76,34 @@
 
           <!-- Right -->
           <ul class="navbar-nav nav-flex-icons">
-            {% if request.user.is_authenticated %}
-            <li class="nav-item">
-              <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect">
-                <span class="badge red z-depth-1 mr-1"> {{ request.user|cart_item_count }} </span>
-                <i class="fas fa-shopping-cart"></i>
-                <span class="clearfix d-none d-sm-inline-block"> Cart </span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
-                <span class="clearfix d-none d-sm-inline-block"> Logout </span>
-              </a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link waves-effect" href="{% url 'account_login' %}">
-                <span class="clearfix d-none d-sm-inline-block"> Login </span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
-                <span class="clearfix d-none d-sm-inline-block"> Signup </span>
-              </a>
-            </li>
-            {% endif %}
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <p style="margin-top: 8px; margin-right: 15px;">{% trans "Welcome back" %} {{ request.user|title }}!</p>
+          </li>
+          <li class="nav-item">
+            <a href="/order-summary/" class="nav-link waves-effect">
+              <span class="badge red z-depth-1 mr-1"> {{ request.user|cart_item_count }} </span>
+              <i class="fas fa-shopping-cart"></i>
+              <span class="clearfix d-none d-sm-inline-block"> {% trans "Cart" %} </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
+              <span class="clearfix d-none d-sm-inline-block"> {% trans "Logout" %} </span>
+            </a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'account_login' %}">
+              <span class="clearfix d-none d-sm-inline-block"> {% trans "Login" %} </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
+              <span class="clearfix d-none d-sm-inline-block"> {% trans "Signup" %} </span>
+            </a>
+          </li>
+          {% endif %}
           </ul>
 
         </div>

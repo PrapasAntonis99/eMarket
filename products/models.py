@@ -4,9 +4,10 @@ from django.shortcuts import reverse
 
 
 CATEGORY_CHOICES = (
-    ('C', 'Casual'),
-    ('SW', 'Sportwear'),
-    ('OW', 'Outwear'),
+    ('All', 'All'),
+    ('Casual', 'Casual'),
+    ('Sportwear', 'Sportwear'),
+    ('Outwear', 'Outwear'),
 )
 
 LABEL_CHOICES = (
@@ -20,10 +21,18 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+
+class Category(models.Model):
+    name = models.CharField(choices=CATEGORY_CHOICES, max_length=10)
+
+    def __str__(self):
+        return self.name
+
+
 class Item(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField()
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
+    category = models.ManyToManyField(Category)
     label = models.CharField(choices=LABEL_CHOICES, blank=True, null=True, max_length=1)
     price = models.IntegerField()
     discount = models.IntegerField(blank=True, null=True)

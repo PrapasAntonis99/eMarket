@@ -248,44 +248,7 @@
       <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
 
         <!-- Navbar brand -->
-        <span class="navbar-brand">{% trans "Categories" %}</span>
-
-        <!-- Collapse button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Collapsible content -->
-        <div class="collapse navbar-collapse" id="basicExampleNav">
-
-          <!-- Links -->
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#">{% trans "All" %}
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">{% trans "Shirts" %}</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">{% trans "Sportwears" %}</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">{% trans "Outwears" %}</a>
-            </li>
-
-          </ul>
-          <!-- Links -->
-
-          <form class="form-inline">
-            <div class="md-form my-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            </div>
-          </form>
-        </div>
-        <!-- Collapsible content -->
+        <span class="navbar-brand">{% trans "Take a look" %}</span>
 
       </nav>
       <!--/.Navbar-->
@@ -298,63 +261,67 @@
 
           {% for item in object_list %}
 
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-6 mb-4">
+            <!--Grid column-->
+            <div class="col-lg-4 col-md-6 mb-4">
 
-            <!--Card-->
-            <div class="card">
+              {% if item.get_label_display != null %}
 
-              <!--Card image-->
-              <div class="view overlay">
-                {% with 'img/merchandise/'|add:item.title|add:'.jpg' as image_static %}
-                  <img src="{% static image_static %}" class="card-img-top" alt="">
-                {% endwith %}
-                <a href="{{ item.get_absolute_url }}">
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-              <!--Card image-->
+                <!--Card-->
+                <div class="card">
 
-              <!--Card content-->
-              <div class="card-body text-center">
-                <!--Category & Title-->
-                <a href="" class="grey-text">
-                  <h5>
-                    {{ item.get_category_display }}
-                    <strong>
-                      {% if item.get_label_display == "primary" %}
-                        <span class="badge badge-pill {{ item.get_label_display }}-color">{% trans "NEW" %}</span>
-                      {% elif item.get_label_display == "danger" %}
-                        <span class="badge badge-pill {{ item.get_label_display }}-color">{% trans "HOT" %}</span>
+                  <!--Card image-->
+                  <div class="view overlay">
+                    {% with 'img/merchandise/'|add:item.title|add:'.jpg' as image_static %}
+                      <img src="{% static image_static %}" class="card-img-top" alt="">
+                    {% endwith %}
+                    <a href="{{ item.get_absolute_url }}">
+                      <div class="mask rgba-white-slight"></div>
+                    </a>
+                  </div>
+                  <!--Card image-->
+
+                  <!--Card content-->
+                  <div class="card-body text-center">
+                    <!--Category & Title-->
+                    <a href="" class="grey-text">
+                      <h5>
+                        {{ item.get_category_display }}
+                        <strong>
+                          {% if item.get_label_display == "primary" %}
+                            <span class="badge badge-pill {{ item.get_label_display }}-color">{% trans "NEW" %}</span>
+                          {% elif item.get_label_display == "danger" %}
+                            <span class="badge badge-pill {{ item.get_label_display }}-color">{% trans "HOT" %}</span>
+                          {% endif %}
+                        </strong>
+                      </h5>
+                    </a>
+                    <h5>
+                      <strong>
+                        <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}</a>
+                      </strong>
+                    </h5>
+
+                    <h4 class="font-weight-bold blue-text">
+                      {% if item.discount != null %}
+                        <strong>{{ item.discount }}€</strong>
+                        <span class="mr-1">
+                          <del style="color:gray;">{{ item.price }}€</del>
+                        </span>
+                      {% else %}
+                        <strong>{{ item.price }}€</strong>
                       {% endif %}
-                    </strong>
-                  </h5>
-                </a>
-                <h5>
-                  <strong>
-                    <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}</a>
-                  </strong>
-                </h5>
+                    </h4>
 
-                <h4 class="font-weight-bold blue-text">
-                  {% if item.discount != null %}
-                    <strong>{{ item.discount }}€</strong>
-                    <span class="mr-1">
-                      <del style="color:gray;">{{ item.price }}€</del>
-                    </span>
-                  {% else %}
-                    <strong>{{ item.price }}€</strong>
-                  {% endif %}
-                </h4>
+                  </div>
+                  <!--Card content-->
 
-              </div>
-              <!--Card content-->
+                </div>
+                <!--Card-->
+
+              {% endif%}
 
             </div>
-            <!--Card-->
-
-          </div>
-          <!--Grid column-->
+            <!--Grid column-->
 
           {% endfor %}
 
