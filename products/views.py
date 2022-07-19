@@ -1,16 +1,33 @@
+from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
 from django.utils import timezone
-from .models import Item, OrderItem, Order, Category
+from .models import *
 from django.utils.translation import gettext as _
-
 from django.contrib.auth.models import User
+
+
+def HomeView(request):
+    qs = home_filter(request)
+    paginator = Paginator(qs, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'queryset': page_obj
+    }
+    return render(request, "home.html", context)
+    
+    
+def home_filter(request):
+    qs = Item.objects.all()
+    hot_items = qs.filter(Q(label='P') | Q(label='D')).distinct()
+    return hot_items
 
 
 class ProductsView(ListView):
@@ -22,13 +39,7 @@ class ProductsView(ListView):
         context = super(ProductsView, self).get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         return context
-
-
-class HomeView(ListView):
-    model = Item
-    paginate_by = 3
-    template_name = "home.html"
-
+    
 
 class ItemDetailView(DetailView):
     model = Item
@@ -48,15 +59,17 @@ class OrderSummaryView(LoginRequiredMixin, View):
 
 
 def ShowCategories(request):
-    item = Item.objects.all()
     category = request.GET.get('category')
-    item = Item.objects.filter(category__name=category)
+    item = Item.objects.filter(category__name=category).order_by('-label')
     categories = Category.objects.all()
     context = {
         'items': item,
         'categories': categories,
     }
     return render(request, 'product-list.html', context)
+
+    
+    
 
 
 @login_required

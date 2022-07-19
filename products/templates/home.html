@@ -63,7 +63,7 @@
         <!--Left-->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="product-list/">{% trans "Products" %}
+            <a class="nav-link waves-effect" href="show-categories/?category=All">{% trans "Products" %}
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -161,14 +161,7 @@
 
         </div>
       </div>
-      <!--/First slide-->
-
-      <!--Second slide-->
-      <div class="carousel-item">
-        <div class="view" style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%283%29.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-          <!-- Mask & flexbox options-->
-          <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+      <!--/First slide-->?category=Allong d-flex justify-content-center align-items-center">
 
             <!-- Content -->
             <div class="text-center white-text mx-5 wow fadeIn">
@@ -259,66 +252,62 @@
         <!--Grid row-->
         <div class="row wow fadeIn">
 
-          {% for item in object_list %}
+          {% for item in queryset %}
 
             <!--Grid column-->
             <div class="col-lg-4 col-md-6 mb-4">
 
-              {% if item.get_label_display != null %}
+              <!--Card-->
+              <div class="card">
 
-                <!--Card-->
-                <div class="card">
+                <!--Card image-->
+                <div class="view overlay">
+                  {% with 'img/merchandise/'|add:item.title|add:'.jpg' as image_static %}
+                    <img src="{% static image_static %}" class="card-img-top" alt="">
+                  {% endwith %}
+                  <a href="{{ item.get_absolute_url }}">
+                    <div class="mask rgba-white-slight"></div>
+                  </a>
+                </div>
+                <!--Card image-->
 
-                  <!--Card image-->
-                  <div class="view overlay">
-                    {% with 'img/merchandise/'|add:item.title|add:'.jpg' as image_static %}
-                      <img src="{% static image_static %}" class="card-img-top" alt="">
-                    {% endwith %}
-                    <a href="{{ item.get_absolute_url }}">
-                      <div class="mask rgba-white-slight"></div>
-                    </a>
-                  </div>
-                  <!--Card image-->
-
-                  <!--Card content-->
-                  <div class="card-body text-center">
-                    <!--Category & Title-->
-                    <a href="" class="grey-text">
-                      <h5>
-                        {{ item.get_category_display }}
-                        <strong>
-                          {% if item.get_label_display == "primary" %}
-                            <span class="badge badge-pill {{ item.get_label_display }}-color">{% trans "NEW" %}</span>
-                          {% elif item.get_label_display == "danger" %}
-                            <span class="badge badge-pill {{ item.get_label_display }}-color">{% trans "HOT" %}</span>
-                          {% endif %}
-                        </strong>
-                      </h5>
-                    </a>
+                <!--Card content-->
+                <div class="card-body text-center">
+                  <!--Category & Title-->
+                  <a href="" class="grey-text">
                     <h5>
+                      {{ item.get_category_display }}
                       <strong>
-                        <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}</a>
+                        {% if item.get_label_display == "primary" %}
+                          <span class="badge badge-pill {{ item.get_label_display }}-color">{% trans "NEW" %}</span>
+                        {% elif item.get_label_display == "danger" %}
+                          <span class="badge badge-pill {{ item.get_label_display }}-color">{% trans "HOT" %}</span>
+                        {% endif %}
                       </strong>
                     </h5>
+                  </a>
+                  <h5>
+                    <strong>
+                      <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}</a>
+                    </strong>
+                  </h5>
 
-                    <h4 class="font-weight-bold blue-text">
-                      {% if item.discount != null %}
-                        <strong>{{ item.discount }}€</strong>
-                        <span class="mr-1">
-                          <del style="color:gray;">{{ item.price }}€</del>
-                        </span>
-                      {% else %}
-                        <strong>{{ item.price }}€</strong>
-                      {% endif %}
-                    </h4>
-
-                  </div>
-                  <!--Card content-->
+                  <h4 class="font-weight-bold blue-text">
+                    {% if item.discount != null %}
+                      <strong>{{ item.discount }}€</strong>
+                      <span class="mr-1">
+                        <del style="color:gray;">{{ item.price }}€</del>
+                      </span>
+                    {% else %}
+                      <strong>{{ item.price }}€</strong>
+                    {% endif %}
+                  </h4>
 
                 </div>
-                <!--Card-->
+                <!--Card content-->
 
-              {% endif%}
+              </div>
+              <!--Card-->
 
             </div>
             <!--Grid column-->
@@ -333,28 +322,24 @@
     </div>
 
     <!--Pagination-->
-    {% if is_paginated %}
       <nav class="d-flex justify-content-center wow fadeIn">
         <ul class="pagination pg-blue">
-
-          {% if page_obj.has_previous %}
+          {% if queryset.has_previous %}
           <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+            <a class="page-link" href="?page={{ queryset.previous_page_number }}" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
               <span class="sr-only">{% trans "Previous" %}</span>
             </a>
           </li>
           {% endif %}
-
           <li class="page-item active">
-            <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
+            <a class="page-link" href="?page={{ queryset.number }}">{{ queryset.number }}
               <span class="sr-only">(current)</span>
             </a>
           </li>
-
-          {% if page_obj.has_next %}
+          {% if queryset.has_next %}
           <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+            <a class="page-link" href="?page={{ queryset.next_page_number }}" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
               <span class="sr-only">{% trans "Next" %}</span>
             </a>
@@ -362,8 +347,7 @@
           {% endif %}
         </ul>
       </nav>
-      {% endif %}
-      <!--Pagination-->
+    <!--Pagination-->
 
   </main>
   <!--Main layout-->
