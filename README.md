@@ -1,2 +1,2 @@
 # eMarket
-Create eShop website for Training 
+Create Django eShop website for Job Training (DWHITE)
